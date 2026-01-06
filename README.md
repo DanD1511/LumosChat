@@ -2,7 +2,7 @@
 
 > A robust, real-time Fullstack chat application built with modern Clean Architecture, .NET 8, and Angular 17.
 
-![LumosChat Banner](./public/LumosChat.png)
+![LumosChat Banner](./LumosChat.Frontend/public/LumosChat.png)
 
 <div align="center">
 
