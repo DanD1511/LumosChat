@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Evita scrollbar doble en la ventana principal */
+}
+
+:root {
+  --bg-color: #0f172a;      
+  --card-bg: #1e293b;       
+  --text-primary: #f8fafc;  
+  --text-secondary: #94a3b8;
+  --accent-color: #3b82f6;  
+  --my-msg-bg: #3b82f6;     
+  --other-msg-bg: #334155;  
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.form-control {
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  color: white;
+  
+  &:focus {
+    background-color: #0f172a;
+    color: white;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color); 
+}
+::-webkit-scrollbar-thumb {
+  background: #475569; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b; 
+}

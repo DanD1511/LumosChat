@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow-lg p-4" style="width: 400px;">
+    <div class="card-body">
+      <h3 class="text-center mb-4 text-success">Crear Cuenta 🚀</h3>
+      
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <form (ngSubmit)="onRegister()">
+        <div class="mb-3">
+          <label for="username" class="form-label">Elige un Usuario</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="username" 
+            [(ngModel)]="data.username" 
+            name="username"
+            required
+            placeholder="Ej: Hermione">
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input 
+            type="password" 
+            class="form-control" 
+            id="password" 
+            [(ngModel)]="data.password" 
+            name="password"
+            required
+            placeholder="******">
+        </div>
+
+        <div class="d-grid gap-2 mb-3">
+          <button type="submit" class="btn btn-success btn-lg" [disabled]="isLoading">
+            {{ isLoading ? 'Creando...' : 'Registrarse' }}
+          </button>
+        </div>
+
+        <div class="text-center">
+          <small>¿Ya tienes cuenta? <a routerLink="/login" class="text-decoration-none">Inicia Sesión aquí</a></small>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

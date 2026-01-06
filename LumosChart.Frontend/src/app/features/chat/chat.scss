@@ -1,0 +1,150 @@
+/* Variables locales inspiradas en la referencia */
+$teal-dark: #006978;
+$teal-main: #00838F;
+$teal-light: #4FB3BF;
+$bg-chat-light: #F5F7F9; /* Gris muy claro para el fondo del chat */
+
+.app-container {
+  height: 100vh;
+  /* CSS Grid: Sidebar fijo de 300px, el resto para el chat */
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  background-color: $bg-chat-light;
+}
+
+/* === SIDEBAR STYLES === */
+.sidebar {
+  background: linear-gradient(180deg, $teal-dark 0%, $teal-main 100%);
+  box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+  z-index: 10;
+
+  .ls-1 { letter-spacing: 1px; font-size: 0.8rem; }
+
+  .user-item {
+    transition: all 0.2s ease;
+    &:hover { background-color: rgba(255,255,255,0.1); }
+    &.active-user { background-color: rgba(255,255,255,0.2); }
+  }
+
+  .border-white-50 { border-color: rgba(255,255,255,0.3) !important; }
+  .text-white-50 { color: rgba(255,255,255,0.6) !important; }
+}
+
+/* === CHAT MAIN STYLES === */
+.chat-main {
+  background-color: $bg-chat-light;
+}
+
+.avatar-sm { width: 32px; height: 32px; object-fit: cover; }
+.avatar-md { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+
+.message-bubble {
+  border-top-left-radius: 2px; /* Esquina puntiaguda */
+  
+  .bubble-arrow {
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid white;
+    border-left: 10px solid transparent;
+  }
+}
+
+/* Botón personalizado color Teal */
+.btn-teal {
+  background-color: $teal-main;
+  color: white;
+  transition: transform 0.1s;
+  &:hover { background-color: darken($teal-main, 5%); }
+  &:active { transform: scale(0.98); }
+}
+
+.cursor-pointer { cursor: pointer; }
+
+/* Scrollbar sutil para la lista de usuarios */
+.user-list::-webkit-scrollbar { width: 5px; }
+.user-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
+
+/* === ESTILOS VISUALES DE BURBUJAS === */
+
+/* Clase de utilidad para el fondo Teal */
+.bg-teal {
+    background-color: $teal-main !important;
+}
+
+/* Estilos base de la burbuja */
+.message-bubble {
+  position: relative;
+  padding: 12px 16px; /* Un poco más de aire */
+  border-radius: 12px; /* Bordes más suaves */
+  
+  /* Lógica de ancho tipo WhatsApp */
+  display: inline-block; /* Importante: Se ajusta al contenido */
+  max-width: 75%; /* Máximo ancho permitido antes de bajar de línea */
+  width: fit-content; /* Se encoge si el texto es corto */
+  min-width: 80px; /* Mínimo para que no se vea ridículo si es solo "Ok" */
+  
+  word-wrap: break-word; /* Romper palabras solo si es necesario (URLs largas) */
+  white-space: pre-wrap; /* Respetar saltos de línea manuales */
+
+  /* Sombra suave */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top-style: solid;
+    border-top-width: 10px;
+  }
+}
+
+/* ---- MIS MENSAJES (Derecha, Teal) ---- */
+.my-message {
+  background-color: $teal-main;
+  color: white;
+  border-top-right-radius: 0 !important;
+  margin-left: auto; /* Empuja a la derecha si usamos flex-column */
+
+  &::before {
+    right: -8px;
+    border-top-color: $teal-main;
+    border-left: 10px solid $teal-main;
+    border-right: 10px solid transparent;
+  }
+}
+
+/* ---- MENSAJES DE OTROS (Izquierda, Blanco) ---- */
+.other-message {
+  background-color: white;
+  color: #1e293b; /* Texto oscuro suave */
+  border-top-left-radius: 0 !important;
+  margin-right: auto; /* Empuja a la izquierda */
+
+  &::before {
+    left: -8px;
+    border-top-color: white;
+    border-right: 10px solid white;
+    border-left: 10px solid transparent;
+  }
+}
+
+/* Avatares y otros elementos previos */
+.avatar-sm { width: 32px; height: 32px; object-fit: cover; }
+.avatar-md { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+
+.btn-teal {
+  background-color: $teal-main;
+  color: white;
+  transition: transform 0.1s;
+  &:hover { background-color: darken($teal-main, 5%); }
+  &:active { transform: scale(0.98); }
+}
+
+.cursor-pointer { cursor: pointer; }
+.user-list::-webkit-scrollbar { width: 5px; }
+.user-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }

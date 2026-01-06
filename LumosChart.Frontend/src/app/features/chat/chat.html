@@ -1,0 +1,100 @@
+<div class="app-container d-flex h-100">
+  <aside class="sidebar d-flex flex-column p-4 text-white">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h5 class="m-0 fw-bold border border-2 rounded-pill px-3 py-1 cursor-pointer">
+        + Invite Friends
+      </h5>
+      <i class="bi bi-search fs-5 cursor-pointer"></i>
+    </div>
+
+    <div class="user-list flex-grow-1 overflow-auto pe-2">
+      <h6 class="text-white-50 mb-3 ls-1">ONLINE USERS ({{ chatService.onlineUsers().length }})</h6>
+
+      <div
+        *ngFor="let user of chatService.onlineUsers()"
+        class="user-item d-flex align-items-center mb-3 p-2 rounded-3 cursor-pointer"
+        [class.active-user]="user === currentUser"
+      >
+        <img
+          [src]="chatService.getAvatar(user)"
+          class="avatar-sm me-3 bg-white rounded-circle p-1"
+        />
+        <div>
+          <h6 class="m-0 fw-bold">{{ user }}</h6>
+          <small class="text-white-50" *ngIf="user === currentUser">You</small>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="sidebar-footer mt-auto pt-3 border-top border-white-50 d-flex justify-content-between align-items-center"
+    >
+      <div>
+        <h6 class="m-0 fw-bold">1 Speaker</h6>
+        <small class="text-white-50">{{ chatService.onlineUsers().length }} Viewers</small>
+      </div>
+      <button class="btn btn-outline-light btn-sm rounded-pill px-3" (click)="logout()">
+        Exit
+      </button>
+    </div>
+  </aside>
+
+  <main class="chat-main d-flex flex-column flex-grow-1 bg-light">
+    <header class="chat-header p-4 bg-white border-bottom d-flex align-items-center shadow-sm">
+      <div class="d-flex align-items-center">
+        <img [src]="chatService.getAvatar(currentUser)" class="avatar-md me-3 shadow-sm" />
+        <div>
+          <h5 class="m-0 fw-bold text-dark">{{ currentUser }} (You)</h5>
+          <small class="text-muted">Active now</small>
+        </div>
+      </div>
+      <div class="ms-auto text-muted fw-bold fs-4">...</div>
+    </header>
+
+    <div class="messages-area flex-grow-1 p-4 overflow-auto" #scrollContainer>
+      <div *ngFor="let msg of chatService.messages()" 
+             class="d-flex mb-3 w-100" 
+             [class.flex-row-reverse]="msg.user === currentUser" 
+             [class.flex-row]="msg.user !== currentUser">
+
+             <img [src]="msg.avatar" class="avatar-md shadow-sm mt-1" 
+                  [class.ms-3]="msg.user === currentUser" 
+                  [class.me-3]="msg.user !== currentUser">
+
+             <div class="d-flex flex-column" style="max-width: 80%;">
+                 
+                 <div class="d-flex align-items-baseline mb-1 gap-2" 
+                      [class.justify-content-end]="msg.user === currentUser">
+                     <h6 class="m-0 fw-bold text-dark" *ngIf="msg.user !== currentUser">{{ msg.user }}</h6>
+                     <small class="text-muted" style="font-size: 0.7rem;">{{ msg.time | date:'shortTime' }}</small>
+                 </div>
+
+                 <div class="message-bubble text-break"
+                      [ngClass]="msg.user === currentUser ? 'my-message' : 'other-message'">
+                     {{ msg.text }}
+                 </div>
+
+             </div>
+        </div>
+    </div>
+
+    <div class="p-4 bg-white border-top">
+      <form
+        (ngSubmit)="sendMessage()"
+        class="input-group shadow-sm rounded-pill overflow-hidden border bg-light"
+      >
+        <span class="input-group-text bg-transparent border-0 ps-4 text-muted">☺</span>
+        <input
+          type="text"
+          class="form-control border-0 bg-transparent text-dark shadow-none"
+          [(ngModel)]="newMessage"
+          name="message"
+          placeholder="Type a message..."
+          autocomplete="off"
+        />
+        <span class="input-group-text bg-transparent border-0 text-muted pe-3">📎</span>
+        <button type="submit" class="btn btn-teal px-4 rounded-pill m-1 fw-bold">Send ➤</button>
+      </form>
+    </div>
+  </main>
+</div>
